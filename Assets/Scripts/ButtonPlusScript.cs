@@ -18,12 +18,12 @@ public class ButtonPlusScript : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             controllerScript.RedPlusClick();
         }
     }
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)//если кнопка зажата
     {
         buttonPressed = true;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnPointerUp(PointerEventData eventData)//если кнопка отжата
     {
         buttonPressed = false;
     }

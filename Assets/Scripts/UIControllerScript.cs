@@ -6,54 +6,41 @@ using UnityEngine.EventSystems;
 
 public class UIControllerScript : MonoBehaviour
 {
-    private float redValue;
-    private float greenValue;
-    private float blueValue;
-    private ColoredInterface cos;
+    private float redValue;//значение для красного цвета
+    private float greenValue;//значение зелёного
+    private float blueValue;//значение синиго
+    private ColoredInterface cos;//скрипт объекта для изменения цвета
 
-    private GameObject target;
-    public Slider greenSlider;
-    public Text redValueText;
-    public Text blueValueText;
-    public Text greenValueText;
+    private GameObject target;//объект изменения
+    public Slider greenSlider;//слайдер для зелёного
+    public Text redValueText;//текст для красного
+    public Text blueValueText;//текст для синего
+    public Text greenValueText;//текст для зелёного
 
-    PointerEventData m_PointerEventData;
-    public EventSystem m_EventSystem;
+    PointerEventData pointerEventData;//информация об ивентах мыши
+    public EventSystem eventSystem;//ивентовая система
 
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButton(0))
-        {//Set up the new Pointer Event
-            m_PointerEventData = new PointerEventData(m_EventSystem);
-            //Set the Pointer Event Position to that of the mouse position
-            m_PointerEventData.position = Input.mousePosition;
-            
-            //Create a list of Raycast Results
+        {//при нажатии кнопки мыши
+            pointerEventData = new PointerEventData(eventSystem);
+            pointerEventData.position = Input.mousePosition;
             List<RaycastResult> results = new List<RaycastResult>();
-            /*
-            //Raycast using the Graphics Raycaster and mouse click position
-            m_Raycaster.Raycast(m_PointerEventData, results);*/
-            m_EventSystem.RaycastAll(m_PointerEventData, results);
-
-            //For every result returned, output the name of the GameObject on the Canvas hit by the Ray
+            eventSystem.RaycastAll(pointerEventData, results);//стреляем лучом (физическим и графическим)
             if (!results[0].Equals(null)  && results[0].gameObject.CompareTag("Colored"))
-            {
-                target = results[0].gameObject;
-                cos = target.GetComponent<ColoredInterface>();
+            {//если попали и в нужный объекта
+                target = results[0].gameObject;//выбираем его
+                cos = target.GetComponent<ColoredInterface>();//берём его скрипт
             }
         }
         if (target != null)
-        {
-            Color currentColor = cos.GetColor();
-            redValue = currentColor.r;
+        {//если объект выбран
+            Color currentColor = cos.GetColor();//получаем его цвет
+            redValue = currentColor.r;//обновляем значения
             greenValue = currentColor.g;
             blueValue = currentColor.b;
-            redValueText.text = ((int)(redValue * 255)).ToString();
+            redValueText.text = ((int)(redValue * 255)).ToString();//выводим значения
             blueValueText.text = ((int)(blueValue * 255)).ToString();
             greenValueText.text = ((int)(greenValue * 255)).ToString();
             greenSlider.value = greenValue;
@@ -61,36 +48,37 @@ public class UIControllerScript : MonoBehaviour
     }
 
     public void BlueButtonClick()
-    {
+    {//нажатие кнопки для синего
         if (target != null)
-        {
-            blueValue = Random.value;
-            cos.ChangeRGB(redValue, greenValue, blueValue);
+        {//если выбран объект
+            blueValue = Random.value;//синему присваиваем случайное значение
+            cos.ChangeRGB(redValue, greenValue, blueValue);//обновляем цвет
         }
     }
 
     public void RedPlusClick()
-    {
+    {//нажатие кнопки + для красного
         if (redValue < 1f && target != null)
-        {
-            redValue = redValue + (float) 1 / 256;
-            cos.ChangeRGB(redValue, greenValue, blueValue);
+        {//если можно увеличить и если выбран объект
+            redValue = redValue + (float) 1 / 256;//прибавляем
+            cos.ChangeRGB(redValue, greenValue, blueValue);//обновляем
         }
     }
     public void RedMinusClick()
-    {
+    {//нажатие кнопки - для красного
         if (redValue > 0f && target != null)
-        {
-            redValue = redValue - (float) 1 / 256;
-            cos.ChangeRGB(redValue, greenValue, blueValue);
+        {//если можно убавить и если выбран объект
+            redValue = redValue - (float) 1 / 256;//убавляем
+            cos.ChangeRGB(redValue, greenValue, blueValue);//обновляем
         }
     }
 
     public void GreenChange()
-    { if (target != null)
-        {
-            greenValue = greenSlider.value;
-            cos.ChangeRGB(redValue, greenValue, blueValue);
+    { //изменение значения слайдера для зелёного
+        if (target != null)
+        {//если выбран объект
+            greenValue = greenSlider.value;//для зелёного приянть значение слайдера
+            cos.ChangeRGB(redValue, greenValue, blueValue);//обновить
         }
     }
 
