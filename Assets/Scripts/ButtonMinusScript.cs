@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,12 +18,12 @@ public class ButtonMinusScript : MonoBehaviour, IPointerDownHandler, IPointerUpH
             controllerScript.RedMinusClick();
         }
     }
-    public void OnPointerDown(PointerEventData eventData)//если кнопка зажата
+    public void OnPointerDown(PointerEventData eventData)//РµСЃР»Рё РєРЅРѕРїРєР° Р·Р°Р¶Р°С‚Р°
     {
         buttonPressed = true;
     }
 
-    public void OnPointerUp(PointerEventData eventData)//если кнопка отжата
+    public void OnPointerUp(PointerEventData eventData)//РµСЃР»Рё РєРЅРѕРїРєР° РѕС‚Р¶Р°С‚Р°
     {
         buttonPressed = false;
     }
