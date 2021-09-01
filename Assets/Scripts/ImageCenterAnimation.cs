@@ -1,12 +1,12 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ImageCenterAnimation : MonoBehaviour
 {
-    int direction = 1;//направление движения
-    public float speed = 100f;//скорость
-    RectTransform rect;//прямоугольник для трансформа
+    int direction = 1;//РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ
+    public float speed = 100f;//СЃРєРѕСЂРѕСЃС‚СЊ
+    RectTransform rect;//РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє РґР»СЏ С‚СЂР°РЅСЃС„РѕСЂРјР°
     private void Start()
     {
         rect = GetComponent<RectTransform>();
@@ -14,9 +14,9 @@ public class ImageCenterAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.right * direction * Time.deltaTime*speed);//перемещаем
+        transform.Translate(Vector3.right * direction * Time.deltaTime*speed);//РїРµСЂРµРјРµС‰Р°РµРј
         if( transform.position.x - rect.rect.width/2 <= 0 || transform.position.x + rect.rect.width/2 >= Screen.width)
-        {//если дошли до края, меняем направление
+        {//РµСЃР»Рё РґРѕС€Р»Рё РґРѕ РєСЂР°СЏ, РјРµРЅСЏРµРј РЅР°РїСЂР°РІР»РµРЅРёРµ
             direction *= -1;
         }
     }
