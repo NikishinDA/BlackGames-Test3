@@ -1,4 +1,4 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,41 +6,41 @@ using UnityEngine.EventSystems;
 
 public class UIControllerScript : MonoBehaviour
 {
-    private float redValue;//значение для красного цвета
-    private float greenValue;//значение зелёного
-    private float blueValue;//значение синиго
-    private ColoredInterface cos;//скрипт объекта для изменения цвета
+    private float redValue;//Р·РЅР°С‡РµРЅРёРµ РґР»СЏ РєСЂР°СЃРЅРѕРіРѕ С†РІРµС‚Р°
+    private float greenValue;//Р·РЅР°С‡РµРЅРёРµ Р·РµР»С‘РЅРѕРіРѕ
+    private float blueValue;//Р·РЅР°С‡РµРЅРёРµ СЃРёРЅРёРіРѕ
+    private ColoredInterface cos;//СЃРєСЂРёРїС‚ РѕР±СЉРµРєС‚Р° РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ С†РІРµС‚Р°
 
-    private GameObject target;//объект изменения
-    public Slider greenSlider;//слайдер для зелёного
-    public Text redValueText;//текст для красного
-    public Text blueValueText;//текст для синего
-    public Text greenValueText;//текст для зелёного
+    private GameObject target;//РѕР±СЉРµРєС‚ РёР·РјРµРЅРµРЅРёСЏ
+    public Slider greenSlider;//СЃР»Р°Р№РґРµСЂ РґР»СЏ Р·РµР»С‘РЅРѕРіРѕ
+    public Text redValueText;//С‚РµРєСЃС‚ РґР»СЏ РєСЂР°СЃРЅРѕРіРѕ
+    public Text blueValueText;//С‚РµРєСЃС‚ РґР»СЏ СЃРёРЅРµРіРѕ
+    public Text greenValueText;//С‚РµРєСЃС‚ РґР»СЏ Р·РµР»С‘РЅРѕРіРѕ
 
-    PointerEventData pointerEventData;//информация об ивентах мыши
-    public EventSystem eventSystem;//ивентовая система
+    PointerEventData pointerEventData;//РёРЅС„РѕСЂРјР°С†РёСЏ РѕР± РёРІРµРЅС‚Р°С… РјС‹С€Рё
+    public EventSystem eventSystem;//РёРІРµРЅС‚РѕРІР°СЏ СЃРёСЃС‚РµРјР°
 
     void Update()
     {
         if (Input.GetMouseButton(0))
-        {//при нажатии кнопки мыши
+        {//РїСЂРё РЅР°Р¶Р°С‚РёРё РєРЅРѕРїРєРё РјС‹С€Рё
             pointerEventData = new PointerEventData(eventSystem);
             pointerEventData.position = Input.mousePosition;
             List<RaycastResult> results = new List<RaycastResult>();
-            eventSystem.RaycastAll(pointerEventData, results);//стреляем лучом (физическим и графическим)
+            eventSystem.RaycastAll(pointerEventData, results);//СЃС‚СЂРµР»СЏРµРј Р»СѓС‡РѕРј (С„РёР·РёС‡РµСЃРєРёРј Рё РіСЂР°С„РёС‡РµСЃРєРёРј)
             if (!results[0].Equals(null)  && results[0].gameObject.CompareTag("Colored"))
-            {//если попали и в нужный объекта
-                target = results[0].gameObject;//выбираем его
-                cos = target.GetComponent<ColoredInterface>();//берём его скрипт
+            {//РµСЃР»Рё РїРѕРїР°Р»Рё Рё РІ РЅСѓР¶РЅС‹Р№ РѕР±СЉРµРєС‚Р°
+                target = results[0].gameObject;//РІС‹Р±РёСЂР°РµРј РµРіРѕ
+                cos = target.GetComponent<ColoredInterface>();//Р±РµСЂС‘Рј РµРіРѕ СЃРєСЂРёРїС‚
             }
         }
         if (target != null)
-        {//если объект выбран
-            Color currentColor = cos.GetColor();//получаем его цвет
-            redValue = currentColor.r;//обновляем значения
+        {//РµСЃР»Рё РѕР±СЉРµРєС‚ РІС‹Р±СЂР°РЅ
+            Color currentColor = cos.GetColor();//РїРѕР»СѓС‡Р°РµРј РµРіРѕ С†РІРµС‚
+            redValue = currentColor.r;//РѕР±РЅРѕРІР»СЏРµРј Р·РЅР°С‡РµРЅРёСЏ
             greenValue = currentColor.g;
             blueValue = currentColor.b;
-            redValueText.text = ((int)(redValue * 255)).ToString();//выводим значения
+            redValueText.text = ((int)(redValue * 255)).ToString();//РІС‹РІРѕРґРёРј Р·РЅР°С‡РµРЅРёСЏ
             blueValueText.text = ((int)(blueValue * 255)).ToString();
             greenValueText.text = ((int)(greenValue * 255)).ToString();
             greenSlider.value = greenValue;
@@ -48,37 +48,37 @@ public class UIControllerScript : MonoBehaviour
     }
 
     public void BlueButtonClick()
-    {//нажатие кнопки для синего
+    {//РЅР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё РґР»СЏ СЃРёРЅРµРіРѕ
         if (target != null)
-        {//если выбран объект
-            blueValue = Random.value;//синему присваиваем случайное значение
-            cos.ChangeRGB(redValue, greenValue, blueValue);//обновляем цвет
+        {//РµСЃР»Рё РІС‹Р±СЂР°РЅ РѕР±СЉРµРєС‚
+            blueValue = Random.value;//СЃРёРЅРµРјСѓ РїСЂРёСЃРІР°РёРІР°РµРј СЃР»СѓС‡Р°Р№РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ
+            cos.ChangeRGB(redValue, greenValue, blueValue);//РѕР±РЅРѕРІР»СЏРµРј С†РІРµС‚
         }
     }
 
     public void RedPlusClick()
-    {//нажатие кнопки + для красного
+    {//РЅР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё + РґР»СЏ РєСЂР°СЃРЅРѕРіРѕ
         if (redValue < 1f && target != null)
-        {//если можно увеличить и если выбран объект
-            redValue = redValue + (float) 1 / 256;//прибавляем
-            cos.ChangeRGB(redValue, greenValue, blueValue);//обновляем
+        {//РµСЃР»Рё РјРѕР¶РЅРѕ СѓРІРµР»РёС‡РёС‚СЊ Рё РµСЃР»Рё РІС‹Р±СЂР°РЅ РѕР±СЉРµРєС‚
+            redValue = redValue + (float) 1 / 256;//РїСЂРёР±Р°РІР»СЏРµРј
+            cos.ChangeRGB(redValue, greenValue, blueValue);//РѕР±РЅРѕРІР»СЏРµРј
         }
     }
     public void RedMinusClick()
-    {//нажатие кнопки - для красного
+    {//РЅР°Р¶Р°С‚РёРµ РєРЅРѕРїРєРё - РґР»СЏ РєСЂР°СЃРЅРѕРіРѕ
         if (redValue > 0f && target != null)
-        {//если можно убавить и если выбран объект
-            redValue = redValue - (float) 1 / 256;//убавляем
-            cos.ChangeRGB(redValue, greenValue, blueValue);//обновляем
+        {//РµСЃР»Рё РјРѕР¶РЅРѕ СѓР±Р°РІРёС‚СЊ Рё РµСЃР»Рё РІС‹Р±СЂР°РЅ РѕР±СЉРµРєС‚
+            redValue = redValue - (float) 1 / 256;//СѓР±Р°РІР»СЏРµРј
+            cos.ChangeRGB(redValue, greenValue, blueValue);//РѕР±РЅРѕРІР»СЏРµРј
         }
     }
 
     public void GreenChange()
-    { //изменение значения слайдера для зелёного
+    { //РёР·РјРµРЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ СЃР»Р°Р№РґРµСЂР° РґР»СЏ Р·РµР»С‘РЅРѕРіРѕ
         if (target != null)
-        {//если выбран объект
-            greenValue = greenSlider.value;//для зелёного приянть значение слайдера
-            cos.ChangeRGB(redValue, greenValue, blueValue);//обновить
+        {//РµСЃР»Рё РІС‹Р±СЂР°РЅ РѕР±СЉРµРєС‚
+            greenValue = greenSlider.value;//РґР»СЏ Р·РµР»С‘РЅРѕРіРѕ РїСЂРёСЏРЅС‚СЊ Р·РЅР°С‡РµРЅРёРµ СЃР»Р°Р№РґРµСЂР°
+            cos.ChangeRGB(redValue, greenValue, blueValue);//РѕР±РЅРѕРІРёС‚СЊ
         }
     }
 

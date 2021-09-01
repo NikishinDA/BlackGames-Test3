@@ -1,9 +1,9 @@
-using System.Collections;
+п»їusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public interface ColoredInterface
-{//интерфейс для объекта, у которого будем менять цвет
+{//РёРЅС‚РµСЂС„РµР№СЃ РґР»СЏ РѕР±СЉРµРєС‚Р°, Сѓ РєРѕС‚РѕСЂРѕРіРѕ Р±СѓРґРµРј РјРµРЅСЏС‚СЊ С†РІРµС‚
     public void ChangeRGB(float r, float g, float b);
     public Color GetColor();
 }
